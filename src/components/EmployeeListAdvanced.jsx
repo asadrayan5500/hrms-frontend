@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, forwardRef, useImperativeHandle } from "react";
 import { getEmployees, deleteEmployee } from "../api/api";
 import ConfirmDialog from "./ConfirmDialog";
 import AttendanceModal from "./AttendanceModal";
@@ -8,7 +8,7 @@ import { useToast } from "../context/ToastContext";
 import { exportToCSV } from "../utils/csvExport";
 import { formatDate } from "../utils/dateFormatter";
 
-export default function EmployeeListAdvanced() {
+const EmployeeListAdvanced = forwardRef(function EmployeeListAdvanced(props, ref) {
   const { addToast } = useToast();
   const [employees, setEmployees] = useState([]);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
@@ -22,6 +22,11 @@ export default function EmployeeListAdvanced() {
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, employeeId: null, employeeName: "" });
   const [attendanceModal, setAttendanceModal] = useState({ isOpen: false, employee: null });
   const [departments, setDepartments] = useState([]);
+
+  // Expose reload method to parent components
+  useImperativeHandle(ref, () => ({
+    reloadEmployees: loadEmployees
+  }));
 
   useEffect(() => {
     loadEmployees();
@@ -462,4 +467,6 @@ export default function EmployeeListAdvanced() {
       />
     </div>
   );
-}
+});
+
+export default EmployeeListAdvanced;

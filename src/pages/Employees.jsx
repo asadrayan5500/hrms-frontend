@@ -17,12 +17,12 @@ export default function Employees() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Professional Header */}
-      <div className="bg-gradient-to-r from-slate-700 to-slate-800 shadow-lg">
+      <div className="bg-white shadow-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Employee Management</h1>
-              <p className="text-slate-300 text-base font-medium">Manage and organize your workforce</p>
+              <h1 className="text-4xl font-bold text-slate-800 mb-2 tracking-tight">Employee Management</h1>
+              <p className="text-slate-600 text-base font-medium">Manage and organize your workforce</p>
             </div>
             <button
               onClick={() => setIsModalOpen(true)}

@@ -27,16 +27,16 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Professional Header */}
-      <div className="bg-gradient-to-r from-slate-700 to-slate-800 shadow-lg">
+      <div className="bg-white shadow-md border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2 tracking-tight">Dashboard</h1>
-              <p className="text-slate-300 text-base font-medium">Centralized Human Resource Management System</p>
+              <h1 className="text-4xl font-bold text-slate-800 mb-2 tracking-tight">Dashboard</h1>
+              <p className="text-slate-600 text-base font-medium">Centralized Human Resource Management System</p>
             </div>
             <div className="text-right">
-              <p className="text-slate-300 text-sm">Last Synced</p>
-              <p className="text-white font-mono text-base font-semibold">{formatTime(lastUpdated)}</p>
+              <p className="text-slate-600 text-sm">Last Synced</p>
+              <p className="text-slate-800 font-mono text-base font-semibold">{formatTime(lastUpdated)}</p>
             </div>
           </div>
         </div>
