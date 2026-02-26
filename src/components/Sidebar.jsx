@@ -62,9 +62,9 @@ export default function Sidebar() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed md:relative md:translate-x-0 transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } w-64 h-auto md:min-h-screen bg-gradient-to-b from-slate-800 to-slate-900 text-white shadow-2xl z-30 md:z-auto overflow-y-auto`}
+        className={`fixed md:static left-0 top-16 w-64 h-auto md:h-auto bg-gradient-to-b from-slate-800 to-slate-900 text-white shadow-2xl transition-transform duration-300 ease-in-out z-30 md:z-0 overflow-y-auto flex flex-col ${
+          isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        }`}
       >
         {/* Logo Section */}
         <div className="p-6 border-b border-slate-700">
@@ -82,7 +82,7 @@ export default function Sidebar() {
         </div>
 
         {/* Menu Items */}
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-2 flex-1">
           <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-4 mb-4">Main Menu</p>
           {menuItems.map((item) => (
             <Link
@@ -109,7 +109,7 @@ export default function Sidebar() {
         </nav>
 
         {/* Footer Section */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-700 bg-slate-800">
+        <div className="p-4 border-t border-slate-700 bg-slate-800 mt-auto">
           <div className="text-xs text-slate-400 space-y-1">
             <p className="font-semibold text-slate-300">System Status</p>
             <div className="flex items-center gap-2">
