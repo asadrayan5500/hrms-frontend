@@ -7,16 +7,27 @@ export default function AttendanceModal({ isOpen, onClose, employee }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (isOpen && employee?.employee_id) {
+    if (isOpen && employee) {
+      console.log("AttendanceModal opened with employee:", employee);
+      console.log("Employee ID:", employee.employee_id);
+      
+      if (!employee.employee_id) {
+        setError("Invalid employee: missing employee_id");
+        setIsLoading(false);
+        return;
+      }
+      
       setIsLoading(true);
       setError(null);
       getAttendance(employee.employee_id)
         .then((data) => {
+          console.log("Attendance records loaded:", data);
           setRecords(data || []);
           setIsLoading(false);
         })
         .catch((err) => {
-          setError("Failed to load attendance records");
+          console.error("Error loading attendance:", err);
+          setError(err.message || "Failed to load attendance records");
           setIsLoading(false);
         });
     }

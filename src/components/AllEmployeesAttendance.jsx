@@ -17,15 +17,26 @@ export default function AllEmployeesAttendance() {
       let completed = 0;
       
       data.forEach((emp) => {
-        getAttendance(emp.employee_id).then((records) => {
-          attendanceMap[emp.employee_id] = records;
-          completed++;
-          
-          if (completed === data.length) {
-            setAllAttendanceRecords(attendanceMap);
-            setIsLoading(false);
-          }
-        });
+        getAttendance(emp.employee_id)
+          .then((records) => {
+            attendanceMap[emp.employee_id] = records || [];
+            completed++;
+            
+            if (completed === data.length) {
+              setAllAttendanceRecords(attendanceMap);
+              setIsLoading(false);
+            }
+          })
+          .catch((err) => {
+            console.error(`Failed to fetch attendance for ${emp.employee_id}:`, err);
+            attendanceMap[emp.employee_id] = [];
+            completed++;
+            
+            if (completed === data.length) {
+              setAllAttendanceRecords(attendanceMap);
+              setIsLoading(false);
+            }
+          });
       });
     });
   }, []);

@@ -36,6 +36,27 @@ export async function markAttendance(data) {
 }
 
 export async function getAttendance(employeeId) {
-  const res = await fetch(`${BASE_URL}/attendance/${employeeId}`);
-  return res.json();
+  if (!employeeId) {
+    throw new Error("Employee ID is required");
+  }
+  
+  const url = `${BASE_URL}/attendance/${employeeId}`;
+  console.log("Fetching attendance from:", url);
+  
+  try {
+    const res = await fetch(url);
+    
+    if (!res.ok) {
+      console.error("Attendance fetch error:", res.status, res.statusText);
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || `HTTP ${res.status}: Failed to get attendance`);
+    }
+    
+    const data = await res.json();
+    console.log("Attendance data received:", data);
+    return data;
+  } catch (error) {
+    console.error("Fetch error:", error);
+    throw error;
+  }
 }

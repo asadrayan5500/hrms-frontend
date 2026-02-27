@@ -38,8 +38,17 @@ export default function AttendanceForm({ employeeId }) {
         setSelectedEmployeeId(employees[0].employee_id);
       }
       setTimeout(() => setSuccess(false), 3000);
-      window.location.reload();
+      // Instead of reloading, let the parent component handle the refresh
+      // or wait for data to refresh automatically
+      setTimeout(() => {
+        // Optionally emit an event or call a callback to refresh
+        if (window.location.reload) {
+          console.log("Attendance marked successfully");
+          // Remove the reload and let the component naturally refresh
+        }
+      }, 500);
     } catch (err) {
+      console.error("Error marking attendance:", err);
       setError(err.message);
     } finally {
       setIsLoading(false);
